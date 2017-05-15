@@ -17,5 +17,3 @@
 .gradle
 build
 
-src/dist/deploy/90_qtest.xml
-src/main/java/org/jpos/qtest/QTestMBean.java
