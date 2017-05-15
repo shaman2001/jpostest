@@ -1,0 +1,21 @@
+*.swp
+.DS_Store
+
+# IDEA Ignores
+*.iml
+*.ipr
+*.iws
+.idea
+
+# Eclipse Ignores
+.classpath
+.metadata
+.settings
+.project
+
+# Gradle Ignores
+.gradle
+build
+
+src/dist/deploy/90_qtest.xml
+src/main/java/org/jpos/qtest/QTestMBean.java
