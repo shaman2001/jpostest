@@ -1,20 +1,23 @@
 <channel-adaptor name='main-channel' logger="Q2">
-    <channel class="org.jpos.iso.channel.NACChannel"
+    <channel class="org.jpos.iso.channel.ASCIIChannel"
              packager="org.jpos.iso.packager.GenericPackager"
              header="6000000000">
         <property name="packager-config"
                   value="jar:packager/iso87binary.xml" />
         <property name="host" value="127.0.0.1" />
-        <property name="port" value="8001" />
+        <property name="port" value="8000" />
+        <property name="connection-timeout" value="15000"/>
         <property name="timeout" value="300000" />
-        <filter
-                class="org.jpos.iso.filter.YourIncomingFilter"
-                direction="incoming" />
-        <filter
-                class="org.jpos.iso.filter.YourOutgoingFilter"
-                direction="outgoing" />
+        <property name="keep-alive" value="false" />
+        <filter class="org.jpos.iso.filter.DelayFilter" direction="incoming" />
+        <filter class="org.jpos.iso.filter.DelayFilter" direction="outgoing" />
+        <filter class='org.jpos.iso.filter.ChannelInfoFilter' direction='both'>
+            <property name='channel-name' value='1000' />
+            <property name='socket-info' value='1001' />
+        </filter>
     </channel>
-    <in>your-channel-send</in>
-    <out>your-channel-receive</out>
+    <in>your-channel-receive</in>
+    <out>your-channel-send</out>
+    <ready>your-channel.ready</ready>
     <reconnect-delay>10000</reconnect-delay>
 </channel-adaptor>
