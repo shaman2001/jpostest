@@ -1,16 +1,21 @@
 <server class="org.jpos.q2.iso.QServer"
         logger="Q2"
-        name="xml-server-8000"
-        realm="xml-server-8000">
+        name="echo-server"
+        realm="echo-server">
     <attr name="port" type="java.lang.Integer">8000</attr>
     <channel class="org.jpos.iso.channel.XMLChannel"
              packager="org.jpos.iso.packager.XMLPackager"
              type="server"
              logger="Q2"
-             realm="xml-server-8000">
+             realm="echo-server">
         <property name="timeout" value="180000"/>
+        <filter class="org.jpos.iso.filter.DelayFilter" direction="outgoing" />
+        <filter class='org.jpos.iso.filter.ChannelInfoFilter' direction='both'>
+            <property name='channel-name' value='1000' />
+            <property name='socket-info' value='1001' />
+        </filter>
     </channel>
-    <request-listener class="org.jpos.iso.IncomingListener"
+    <request-listener class="org.jpos.qtest.EchoHandler"
                       logger="Q2"
                       realm="incoming-request-listener">
         <property name="queue" value="TXNMGR"/>
